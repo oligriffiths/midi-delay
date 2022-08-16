@@ -22,17 +22,15 @@ program.parse();
  */
 const attemptConnect = async (midiName, wait) => {
   return new Promise(resolve => {
-    let timer;
     const handler = () => {
       try {
         resolve(new midi.Input(midiName));
-        clearTimeout(timer);
       } catch (e) {
         if (!wait) {
           throw e;
         }
 
-        timer = setTimeout(handler, wait);
+        setTimeout(handler, wait);
       }
     };
 
